@@ -6,11 +6,11 @@ public class Game implements Runnable {
 
     public Game() {
         board = new Board();
-        player1 = new Bot(CellState.RED, 4);
-        player2 = new HumanPlayer("Human player", CellState.YELLOW);
-//
-//        player1 = new HumanPlayer("Player 1", CellState.RED);
-//        player2 = new Bot(CellState.YELLOW, 4);
+//        player1 = new Bot(CellState.RED, 4);
+//        player2 = new HumanPlayer("Human player", CellState.YELLOW);
+
+        player1 = new HumanPlayer("Player 1", CellState.RED);
+        player2 = new Bot(CellState.YELLOW, 4);
 //        player2 = new HumanPlayer("Player 2", CellState.YELLOW);
     }
 

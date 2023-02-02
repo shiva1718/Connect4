@@ -43,7 +43,7 @@ public class Bot extends Player {
                         bestMove = i;
                     }
                 } else {
-                    double score = minimax(board, color.switchColor(), 0);
+                    double score = minimax(board, color.switchColor(), 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
                     board.removeAtColumn(i);
                     if (score > bestScore) {
                         bestScore = score;
@@ -58,7 +58,7 @@ public class Bot extends Player {
     }
 
     // implement minimax algorithm for connect4 game
-    private double minimax(Board board, CellState cur, int depth) {
+    private double minimax(Board board, CellState cur, int depth, double alpha, double beta) {
         if (memo.containsKey(board)) {
             return memo.get(board);
         }
@@ -78,7 +78,7 @@ public class Bot extends Player {
                     board.removeAtColumn(i);
                     return 0;
                 }
-                double score = minimax(board, cur.switchColor(), depth + 1);
+                double score = minimax(board, cur.switchColor(), depth + 1, alpha, beta);
                 if (!board.removeAtColumn(i)) {
                     System.out.println("UNABLE TO REMOVE:");
                     System.out.println(board);
@@ -87,8 +87,15 @@ public class Bot extends Player {
                 }
                 if (cur == color) {
                     stateScore = Math.max(stateScore, score);
+                    alpha = Math.max(alpha, score);
                 } else {
                     stateScore = Math.min(stateScore, score);
+                    beta = Math.min(beta, score);
+                }
+                if (beta <= alpha) {
+//                    memo.put(new Board(board), stateScore);
+//                    System.out.println("Pruning at depth " + depth);
+                    return stateScore;
                 }
             }
         }
