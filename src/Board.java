@@ -4,7 +4,7 @@ public class Board {
     public static final int ROWS = 6;
     public static final int COLUMNS = 7;
     public static final int TOTAL_CELLS = ROWS * COLUMNS;
-    public static final int WIN_COUNT = 3;
+    public static final int WIN_COUNT = 4;
     private CellState[][] board;
     private int[] columnHeights;
     private int countFilled = 0;
